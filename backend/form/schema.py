@@ -10,8 +10,17 @@ class AlternativeType(DjangoObjectType):
 
 
 class QuestionType(DjangoObjectType):
+    question_number = g.Int()
+    question_text = g.String()
+
     class Meta:
         model = Question
+
+    def resolve_question_number(self, info):
+        return self.number
+
+    def resolve_question_text(self, info):
+        return self.statement
 
 
 class FormType(DjangoObjectType):
@@ -68,7 +77,7 @@ class CreateForm(g.Mutation):
         
         for question_data in questions_data:
             question_number = question_data.get('question_number')
-            if Question.objects.filter(form=form, question_number=question_number).exists():
+            if Question.objects.filter(form=form, number=question_number).exists():
                 raise Exception("Question number already exists for this form")
 
             alternatives_data = None
@@ -78,6 +87,12 @@ class CreateForm(g.Mutation):
             images_data = None
             if 'images' in question_data:
                 images_data = question_data.pop('images')
+
+            if 'question_number' in question_data:
+                question_data['number'] = question_data.pop('question_number')
+
+            if 'question_text' in question_data:
+                question_data['statement'] = question_data.pop('question_text')
                 
             question = Question(form=form, **question_data)
             

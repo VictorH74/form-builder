@@ -1,5 +1,5 @@
 reset_all:
-	docker-compose down --volumes --remove-orphans
+	docker compose down --volumes --remove-orphans
 	sudo rm -rf data
 	make build
 
@@ -7,21 +7,21 @@ make start:
 	make build
 	make migrations 
 run: 
-	docker-compose up -d
+	docker compose up -d
 
 down:
-	docker-compose down
+	docker compose down
 
 build:
 	make remove_migration_files
-	docker-compose build --no-cache
+	docker compose build --no-cache
 	make run
 
 rebuild_web:
-	docker-compose up -d --no-deps --build web
+	docker compose up -d --no-deps --build web
 
 rebuild_backend:
-	docker-compose up -d --no-deps --build api
+	docker compose up -d --no-deps --build api
 
 migrations:
 	docker exec -it formbuilder_api bash -c "python manage.py makemigrations"
@@ -34,7 +34,7 @@ superuser:
 	docker exec -it formbuilder_api bash -c "python manage.py createsuperuser"
 
 logs:
-	docker-compose logs -f
+	docker compose logs -f
 
 db_bash:
 	docker exec -it formbuilder_db bash

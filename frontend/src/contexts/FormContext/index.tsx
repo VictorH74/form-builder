@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from "react"
 import { CREATE_FORM_MUTATION, DELETE_FORM_MUTATION, FORMS_QUERY } from "./graphql_operators";
 import { IFormProvider, IFormList, IAddForm } from "./types";
 import { useManualQuery, useMutation } from 'graphql-hooks';
-import useAuth from "@/hooks/UseAuth";
+import {useAuth} from "@/hooks/UseAuth";
 
 export const FormContext = createContext<IFormProvider | null>(null);
 
@@ -33,6 +33,7 @@ const FormProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
     }, [auth?.user])
 
     const addForm = async (form: IAddForm, callBack: () => void) => {
+        console.log(form)
         const res = await createForm({
             variables: form
         })

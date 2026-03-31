@@ -66,7 +66,7 @@ export default function useAddForm(form: IAddForm | undefined) {
     const addQuestion = (type: string) => {
         let keys = ["questionNumber", "questionText", "type", "alternatives"]
         let questionNumber = formData.questions.length + 1
-        let question: IQuestion = { questionNumber, questionText: translate("questionText", questionNumber), type: "" }
+        let question: IQuestion = { questionNumber: questionNumber, questionText: translate("questionText", questionNumber), type: "" }
 
         keys.forEach(key => {
             if (key === "type") question[key] = type

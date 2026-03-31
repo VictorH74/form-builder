@@ -2,7 +2,7 @@ import React from "react"
 import { Container, Nav, Link, Line, AccountDetail, LoginBtn } from "./styles"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { navData } from "./data";
-import useAuth from "@/hooks/UseAuth";
+import {useAuth} from "@/hooks/UseAuth";
 import useLanguage from "@/hooks/UseLanguage";
 import LogoutIcon from '@mui/icons-material/Logout';
 import ListItemButton from '@mui/material/ListItemButton';

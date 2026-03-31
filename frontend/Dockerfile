@@ -1,5 +1,4 @@
-# Declare the base image
-FROM node:16.18.0-alpine
+FROM node:20.0.0-alpine
 
 RUN mkdir -p /home/node/app
 
